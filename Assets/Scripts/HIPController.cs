@@ -21,6 +21,8 @@ public class HIPController : MonoBehaviour
     public float kUser;
     public float kRender;
 
+    public float forcePorcentage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,13 +33,18 @@ public class HIPController : MonoBehaviour
     void Update()
     {
 
+        if (forcePorcentage < 0)
+            forcePorcentage = 0;
+        if (forcePorcentage > 100)
+            forcePorcentage = 100;
+
         FDamping = -b * v;
         FUser = kUser * (intent.transform.position - transform.position);
         FRender = kRender * (physical.transform.position - transform.position);
 
         FTotal = FDamping + FUser + FRender;
 
-        v = v + h / m * FTotal;
+        v = v + (h / m) * (FTotal * (forcePorcentage/100));
         transform.position = transform.position + h * v;
 
     }

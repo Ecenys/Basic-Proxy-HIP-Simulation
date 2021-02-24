@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class IntentionController : MonoBehaviour
 {
+    public float velocity = 1;
+
+    public float minDistance;
+    public float maxDistance;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKey("w"))
+        if (Input.GetKey("f"))
         {
-            transform.position += new Vector3(0, 0.01f, 0);
+            transform.localPosition += new Vector3(-0.01f * velocity, 0, 0);
         }
-        if (Input.GetKey("a"))
+        if (Input.GetKey("r"))
         {
-            transform.position += new Vector3(-0.01f, 0, 0);
+            transform.localPosition += new Vector3(0.01f * velocity, 0, 0);
         }
-        if (Input.GetKey("s"))
-        {
-            transform.position += new Vector3(0, -0.01f, 0);
-        }
-        if (Input.GetKey("d"))
-        {
-            transform.position += new Vector3(0.01f, 0, 0);
-        }
+
+        if (transform.localPosition.x < minDistance)
+            transform.localPosition = new Vector3(minDistance, 0, 0);
+        if(transform.localPosition.x > maxDistance)
+            transform.localPosition = new Vector3(maxDistance, 0, 0);
     }
 }
