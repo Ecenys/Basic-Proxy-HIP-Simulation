@@ -6,9 +6,7 @@ public class FingerController : MonoBehaviour
 {
     public enum SimulationType
     {
-        /// <summary> Custom tracking hardware is used, so offsets are calculated during Start(). </summary>
         Optimal,
-        /// <summary> SenseGlove Vive Tracker Mount </summary>
         SenseGlove
     }
 
@@ -22,7 +20,7 @@ public class FingerController : MonoBehaviour
 
     private void Start()
     {
-        obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        //obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
 
     }
 
@@ -30,11 +28,13 @@ public class FingerController : MonoBehaviour
     {
         if(simulationType == SimulationType.Optimal)
         {
-            obstacles[0].GetComponent<BoxCollider>().isTrigger = false;
+            GetComponent<SphereCollider>().isTrigger = false;
+            //obstacles[0].GetComponent<BoxCollider>().isTrigger = false;
         }
         else
         {
-            obstacles[0].GetComponent<BoxCollider>().isTrigger = true;
+            GetComponent<SphereCollider>().isTrigger = true;
+            //obstacles[0].GetComponent<BoxCollider>().isTrigger = true;
         }
     }
 
@@ -43,11 +43,11 @@ public class FingerController : MonoBehaviour
         if (simulationType == SimulationType.SenseGlove)
         {
             if(!blocked || Vector2.Distance(transform.position, baseHand.position) < Vector2.Distance(intention.position, baseHand.position))
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(intention.position.x, intention.position.y, 0), Time.deltaTime * 10);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(intention.position.x, intention.position.y, transform.position.z), Time.deltaTime * 10);
                 //transform.position = new Vector3(intention.position.x, intention.position.y, 0);
         }
         else
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(intention.position.x, intention.position.y, 0), Time.deltaTime * 10);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(intention.position.x, intention.position.y, transform.position.z), Time.deltaTime * 10);
     }
 
     private void OnTriggerEnter(Collider other)
