@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HIPController : MonoBehaviour
 {
@@ -30,22 +28,30 @@ public class HIPController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if ((intent.transform.position - physical.transform.position).magnitude <= 0.05f)
+        {
+            transform.position = physical.transform.position;
+        }
+        else
+        {
+            if (forcePorcentage < 0)
+                forcePorcentage = 0;
+            if (forcePorcentage > 100)
+                forcePorcentage = 100;
 
-        if (forcePorcentage < 0)
-            forcePorcentage = 0;
-        if (forcePorcentage > 100)
-            forcePorcentage = 100;
+            FDamping = -b * v;
+            FUser = kUser * (intent.transform.position - transform.position);
+            FRender = kRender * (physical.transform.position - transform.position);
 
-        FDamping = -b * v;
-        FUser = kUser * (intent.transform.position - transform.position);
-        FRender = kRender * (physical.transform.position - transform.position);
+            FTotal = FDamping + FUser + FRender;
 
-        FTotal = FDamping + FUser + FRender;
+            v = v + (h / m) * (FTotal * (forcePorcentage / 100));
+            transform.position = transform.position + h * v;
 
-        v = v + (h / m) * (FTotal * (forcePorcentage/100));
-        transform.position = transform.position + h * v;
+        }
 
+        transform.rotation = intent.transform.rotation;
     }
 }
