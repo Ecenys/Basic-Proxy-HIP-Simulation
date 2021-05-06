@@ -26,4 +26,9 @@ public class IntentionController : MonoBehaviour
         if(transform.localPosition.x > maxDistance)
             transform.localPosition = new Vector3(maxDistance, 0, 0);
     }
+
+    public double relativePositionDistance()
+    {
+        return transform.position.x;
+    }
 }
