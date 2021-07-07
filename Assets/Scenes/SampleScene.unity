@@ -174,7 +174,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.7272124
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 1154991395}
   - component: {fileID: 1154991394}
   m_Layer: 0
-  m_Name: Base
+  m_Name: Base Proxy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154991389}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46b6fd055496f694da238c1758b3e313, type: 3}
   m_Name: 
@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8611da3142cfad409ad08ed5602e37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeStep: 0.001
+  TimeStep: 0.1
   intention: {fileID: 1613709216}
   proxy: {fileID: 1154991389}
   hip: {fileID: 1838556586}
@@ -792,7 +792,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427212725}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427212725}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d44b0a1c33b0ee04fa9d9c943cf9521b, type: 3}
   m_Name: 
@@ -847,6 +847,7 @@ MonoBehaviour:
   velocity: 5
   minDistance: 1
   maxDistance: 5
+  relativeObject: {fileID: 1838556587}
 --- !u!1 &1575634406
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +902,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575634406}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -954,15 +955,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intent: {fileID: 1427212725}
-  physical: {fileID: 1580244763}
+  physical: {fileID: 1838556586}
   calculationVersion: 1
   part: 1
   b: 3
   h: 0.01
   m: 1
-  v: 0
   kUser: 10
   kRender: 10
+  relativeObject: {fileID: 1838556587}
   forcePorcentage: 100
   FTotal: {x: 0, y: 0, z: 0}
 --- !u!1 &1580244763
@@ -980,7 +981,7 @@ GameObject:
   - component: {fileID: 1580244766}
   - component: {fileID: 1580244767}
   m_Layer: 0
-  m_Name: Finger
+  m_Name: Finger Proxy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1023,7 +1024,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580244763}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c82bdd7946dba954ebd853618b5bd635, type: 3}
   m_Name: 
@@ -1051,7 +1052,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580244763}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1192,7 +1193,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613709216}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adfcba032fbaca54383120e3af814552, type: 3}
   m_Name: 
@@ -1500,7 +1501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 434.57, y: 229.88}
+  m_AnchoredPosition: {x: 391, y: 207.12}
   m_SizeDelta: {x: 279.61377, y: 57.73909}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1799570587
@@ -1601,9 +1602,9 @@ MonoBehaviour:
   b: 3
   h: 0.01
   m: 1
-  v: 0
   kUser: 50
   kRender: 50
+  relativeObject: {fileID: 0}
   forcePorcentage: 100
   FTotal: {x: 0, y: 0, z: 0}
 --- !u!23 &1838556590
@@ -1753,7 +1754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -458.35, y: 183.76}
+  m_AnchoredPosition: {x: -415, y: 161}
   m_SizeDelta: {x: 232.05652, y: 149.9714}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2028605451

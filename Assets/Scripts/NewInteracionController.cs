@@ -35,8 +35,6 @@ public class NewInteracionController : MonoBehaviour
         stepSymplectic();
     }
 
-
-
     private void stepSymplectic()
     {
         double[,] x = calculateX();
@@ -57,28 +55,36 @@ public class NewInteracionController : MonoBehaviour
 
     private double[,] calculateX()
     {
-        //M
-        double mX = hip.GetComponent<HIPController>().m;
-        double mZ = fingerHip.GetComponent<HIPController>().m;
+        ////M
+        //double mX = hip.GetComponent<HIPController>().m;
+        //double mZ = fingerHip.GetComponent<HIPController>().m;
 
-        double[,] firstComponent = multiply(Matrix.Identity(2), mX + mZ);
-        double[,] secondComponent = multiply(u, mZ);
-        double[,] thirdComponent = multiply(transpose(u), mZ);
-        double fourthComponent = multiply(multiply(transpose(u), mZ), u)[0, 0];
+        //double[,] firstComponent = multiply(Matrix.Identity(2), mX + mZ);
+        //double[,] secondComponent = multiply(u, mZ);
+        //double[,] thirdComponent = multiply(transpose(u), mZ);    
+        //double fourthComponent = multiply(multiply(transpose(u), mZ), u)[0, 0];
 
-        M = new double[,]{
-            {firstComponent[0,0], firstComponent[0,1], secondComponent[0,0]},
-            {firstComponent[1,0], firstComponent[1,1], secondComponent[0,1]},
-            {thirdComponent[0,0], thirdComponent[1,0], fourthComponent}
-        };
+        //M = new double[,]{
+        //    {firstComponent[0,0], firstComponent[0,1], secondComponent[0,0]},
+        //    {firstComponent[1,0], firstComponent[1,1], secondComponent[0,1]},
+        //    {thirdComponent[0,0], thirdComponent[1,0], fourthComponent}
+        //};
 
-        //b
-        b = computeForces();
+        ////b
+        //b = computeForces();
 
-        //Solve M·X = b
-        X = Matrix.Solve(M, b);
+        ////Solve M·X = b
+        //X = Matrix.Solve(M, b);
 
-        return X;
+        //return X;
+        double[,] x = new double[,] {
+            {hip.GetComponent<HIPController>().positionXY()[0,0] },
+            {hip.GetComponent<HIPController>().positionXY()[0,1] },
+            {fingerHip.GetComponent<HIPController>().relativePositionDistance() }
+            };
+
+        return x;
+
     }
 
     public double[,] calculateV()

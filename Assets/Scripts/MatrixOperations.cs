@@ -174,9 +174,9 @@ namespace MatrixOperations
 
             double[,] matrix3 = new double[matrix1Rows, matrix1Cols];
 
-            for (int i = 1; i < matrix1Rows; i++)
+            for (int i = 0; i < matrix1Rows; i++)
             {
-                for (int j = 1; j < matrix1Cols; j++)
+                for (int j = 0; j < matrix1Cols; j++)
                 {
                     matrix3[i, j] = matrix1[i, j] - matrix2[i, j];
                 }

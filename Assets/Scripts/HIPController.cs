@@ -28,7 +28,9 @@ public class HIPController : MonoBehaviour
 
     public float kUser;
     public float kRender;
-    
+
+    public Transform relativeObject;
+
     [Space]
     
     [Range(0, 100)]
@@ -53,7 +55,7 @@ public class HIPController : MonoBehaviour
     }
     public double relativePositionDistance()
     {
-        return transform.position.x;
+        return Vector3.Distance(relativeObject.transform.position, transform.position);
     }
 
     public void setPositionXY(double[,] position)

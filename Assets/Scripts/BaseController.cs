@@ -14,9 +14,9 @@ public class BaseController : MonoBehaviour
 
     public Transform intention;
 
-    //private void FixedUpdate()
-    //{
-    //    transform.position = Vector3.MoveTowards(transform.position, new Vector3(intention.position.x, intention.position.y, transform.position.z), Time.deltaTime * 10);
-    //    transform.rotation = intention.rotation;
-    //}
+    private void FixedUpdate()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(intention.position.x, intention.position.y, transform.position.z), Time.deltaTime * 10);
+        transform.rotation = intention.rotation;
+    }
 }

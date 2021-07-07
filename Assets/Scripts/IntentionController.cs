@@ -9,6 +9,8 @@ public class IntentionController : MonoBehaviour
     public float minDistance;
     public float maxDistance;
 
+    public Transform relativeObject;
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -29,6 +31,6 @@ public class IntentionController : MonoBehaviour
 
     public double relativePositionDistance()
     {
-        return transform.position.x;
+        return Vector3.Distance(relativeObject.position, transform.position);
     }
 }
