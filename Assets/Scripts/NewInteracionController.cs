@@ -8,6 +8,9 @@ using DenseMatrixXD = MathNet.Numerics.LinearAlgebra.Double.DenseMatrix;
 
 public class NewInteracionController : MonoBehaviour
 {
+    [Header("General Parameters")]
+    public float TimeStep = 1f;
+
     [Header("Hand Components")]
     public GameObject intention;
     public GameObject proxy;
@@ -24,7 +27,35 @@ public class NewInteracionController : MonoBehaviour
     private double[,] X;
     private double[,] b;
 
+    double[,] fX;
+    double fZ;
+
     void FixedUpdate()
+    {
+        stepSymplectic();
+    }
+
+
+
+    private void stepSymplectic()
+    {
+        double[,] x = calculateX();
+        double[,] v = calculateV();
+        double[,] f = computeForces();
+        double[,] Minv = calculateMinv();
+
+        
+
+        // v = v + TimeStep * Minv * f; 
+        v = add(v, multiply(TimeStep, multiply(Minv, f)));
+        // x = x + TimeStep * v
+        x = add(x, multiply(TimeStep, v));
+
+        setV(v);
+        setX(x);
+    }
+
+    private double[,] calculateX()
     {
         //M
         double mX = hip.GetComponent<HIPController>().m;
@@ -33,7 +64,7 @@ public class NewInteracionController : MonoBehaviour
         double[,] firstComponent = multiply(Matrix.Identity(2), mX + mZ);
         double[,] secondComponent = multiply(u, mZ);
         double[,] thirdComponent = multiply(transpose(u), mZ);
-        double fourthComponent = multiply(multiply(transpose(u), mZ), u)[0,0];
+        double fourthComponent = multiply(multiply(transpose(u), mZ), u)[0, 0];
 
         M = new double[,]{
             {firstComponent[0,0], firstComponent[0,1], secondComponent[0,0]},
@@ -42,6 +73,27 @@ public class NewInteracionController : MonoBehaviour
         };
 
         //b
+        b = computeForces();
+
+        //Solve M·X = b
+        X = Matrix.Solve(M, b);
+
+        return X;
+    }
+
+    public double[,] calculateV()
+    {
+        double[,] v = new double[,] {
+            {hip.GetComponent<HIPController>().v[0,0] },
+            {hip.GetComponent<HIPController>().v[1,0] },
+            {fingerHip.GetComponent<HIPController>().v[0,0] }
+            };
+
+        return v;
+    }
+
+    private double[,] computeForces()
+    {
         double kXU = hip.GetComponent<HIPController>().kUser;
         double kZU = fingerHip.GetComponent<HIPController>().kUser;
 
@@ -51,8 +103,8 @@ public class NewInteracionController : MonoBehaviour
         double[,] iX = intention.GetComponent<BaseIntentionController>().positionXY();
         double iZ = fingerIntention.GetComponent<IntentionController>().relativePositionDistance();
 
-        double[,] fX = multiply(sub(iX, x), kXU);
-        double fZ = (iZ - z) * kZU;
+        fX = multiply(sub(iX, x), kXU);
+        fZ = (iZ - z) * kZU;
 
         b = new double[,] {
             {fX[0,0]},
@@ -60,12 +112,31 @@ public class NewInteracionController : MonoBehaviour
             {fZ}
         };
 
-        //Solve M·X = b
-        X = Matrix.Solve(M,b);
+        return b;
+    }
 
-        hip.GetComponent<HIPController>().setPositionXY(new double[,] { { X[0, 0] }, { X[1,0] } });
-        fingerHip.GetComponent<HIPController>().setRelativePositionDistance(X[2, 0]);
+    private double[,] calculateMinv()
+    {
+        double mX = hip.GetComponent<HIPController>().m;
+        double mZ = fingerHip.GetComponent<HIPController>().m;
 
-        //Debug.Log("El resultado de Mx=b es " + X[0, 0] + ", " + X[1, 0] + ", " + X[2, 0]);
+        double[,] minv = { 
+            { 1.0 / mX, 0 ,         0}, 
+            {0,         1.0 / mX,   0 }, 
+            { 0,        0,          1.0 / mZ } };
+
+        return minv;
+    }
+
+    private void setV(double[,] v){
+        hip.GetComponent<HIPController>().v[0, 0] = v[0, 0];
+        hip.GetComponent<HIPController>().v[1, 0] = v[1, 0];
+        fingerHip.GetComponent<HIPController>().v[0, 0] = v[2, 0];
+    }
+
+    private void setX(double[,] x)
+    {
+        hip.GetComponent<HIPController>().setPositionXY(new double[,] { { x[0, 0] }, { x[1, 0] } });
+        fingerHip.GetComponent<HIPController>().setRelativePositionDistance(x[2, 0]);
     }
 }

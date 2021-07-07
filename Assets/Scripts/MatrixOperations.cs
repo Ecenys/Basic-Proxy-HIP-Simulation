@@ -84,6 +84,13 @@ namespace MatrixOperations
 
             return vector;
         }
+
+        public static double[,] multiply(double scalar, double[,] matrix)
+        {
+            return multiply(matrix, scalar);
+        }
+
+
         public static double[,] multiply(double[,] matrix, double scalar)
         {
             int w = matrix.GetLength(0);
@@ -99,8 +106,6 @@ namespace MatrixOperations
 
             return matrix;
         }
-
-
         public static double[,] multiply(double[,] matrix1, double[,] matrix2)
         {
             var matrix1Rows = matrix1.GetLength(0);
@@ -146,9 +151,9 @@ namespace MatrixOperations
 
             double[,] matrix3 = new double[matrix1Rows, matrix1Cols];
 
-            for (int i = 1; i <= matrix1Rows; i++)
+            for (int i = 0; i < matrix1Rows; i++)
             {
-                for (int j = 1; j <= matrix2Rows; j++)
+                for (int j = 0; j < matrix2Cols; j++)
                 {
                     matrix3[i, j] = matrix1[i, j] + matrix2[i, j];
                 }
