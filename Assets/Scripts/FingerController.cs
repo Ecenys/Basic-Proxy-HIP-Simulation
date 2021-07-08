@@ -11,9 +11,10 @@ public class FingerController : MonoBehaviour
     private bool blocked = false;
     public GameObject[] obstacles;
 
-    private void Start()
+    private void FixedUpdate()
     {
-        //obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(intention.position.x, intention.position.y, intention.position.z), Time.deltaTime * 10);
+        transform.rotation = intention.rotation;
 
     }
 }

@@ -22,6 +22,9 @@ public class NewInteracionController : MonoBehaviour
     public GameObject fingerHip;
     public double[,] u = new double[,] { { 1, 0 } };
 
+    [Header("Debug values")]
+    public float forceRender;
+
     //Components of M·x=b
     private double[,] M;
     private double[,] X;
@@ -33,6 +36,8 @@ public class NewInteracionController : MonoBehaviour
     void FixedUpdate()
     {
         stepSymplectic();
+
+        //Debug values
     }
 
     private void stepSymplectic()
@@ -46,6 +51,14 @@ public class NewInteracionController : MonoBehaviour
 
         // v = v + TimeStep * Minv * f; 
         v = add(v, multiply(TimeStep, multiply(Minv, f)));
+        Debug.Log(v[2, 0]);
+
+        Debug.Log(TimeStep * v[2, 0]);
+        Debug.Log(x[2,0] + TimeStep * v[2, 0]);
+
+        Debug.Log(x[2,0]);
+        Debug.Log("");
+
         // x = x + TimeStep * v
         x = add(x, multiply(TimeStep, v));
 

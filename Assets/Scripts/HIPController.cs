@@ -30,6 +30,7 @@ public class HIPController : MonoBehaviour
     public float kRender;
 
     public Transform relativeObject;
+    public Transform baseHand;
 
     [Space]
     
@@ -57,6 +58,10 @@ public class HIPController : MonoBehaviour
     {
         return Vector3.Distance(relativeObject.transform.position, transform.position);
     }
+    public double fingerDistance()
+    {
+        return Vector3.Distance(baseHand.transform.position, transform.position);
+    }
 
     public void setPositionXY(double[,] position)
     {
@@ -65,6 +70,11 @@ public class HIPController : MonoBehaviour
 
     public void setRelativePositionDistance(double position)
     {
-        transform.position = new Vector3((float)position, 0, 0);
+        transform.position = relativeObject.position + 
+            new Vector3(
+                (float)position * Mathf.Cos(baseHand.GetComponent<IntentionController>().rotationRadians),
+                (float)position * Mathf.Sin(baseHand.GetComponent<IntentionController>().rotationRadians), 
+                0
+            );
     }
 }
