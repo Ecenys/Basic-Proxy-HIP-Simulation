@@ -39,7 +39,7 @@ public class HIPController : MonoBehaviour
 
     #region PrivateValues
     [ReadOnly]
-    public Vector3 FTotal;
+    private Vector3 FTotal;
     private Vector3 FDamping;
     private Vector3 FUser;
     private Vector3 FRender;
@@ -66,15 +66,5 @@ public class HIPController : MonoBehaviour
     public void setRelativePositionDistance(double position)
     {
         transform.position = new Vector3((float)position, 0, 0);
-    }
-
-    private Matrix4x4 vectorTranspose(Vector3 vector)
-    {
-        Matrix4x4 matrix = new Matrix4x4();
-        matrix[0, 0] = vector.x;
-        matrix[1, 0] = vector.y;
-        matrix[2, 0] = vector.z;
-
-        return matrix;
     }
 }
