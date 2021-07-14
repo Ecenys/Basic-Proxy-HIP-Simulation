@@ -19,4 +19,9 @@ public class BaseController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(intention.position.x, intention.position.y, transform.position.z), Time.deltaTime * 10);
         transform.rotation = intention.rotation;
     }
+
+    public double[,] positionXY()
+    {
+        return new double[,] { { transform.position.x, transform.position.y } };
+    }
 }

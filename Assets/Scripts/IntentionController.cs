@@ -53,7 +53,7 @@ public class IntentionController : MonoBehaviour
 
     public double relativePositionDistance()
     {
-        return Vector3.Distance(relativeObject.position, transform.position);
+        return Vector2.Distance(relativeObject.position, transform.position);
     }
 
     private float ConvertToRadians(float angle)

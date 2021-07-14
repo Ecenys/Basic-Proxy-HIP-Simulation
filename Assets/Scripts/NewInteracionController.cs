@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using static MatrixOperations.MatrixOperations;
-using Accord.Math;
 using VectorXD = MathNet.Numerics.LinearAlgebra.Vector<double>;
 using MatrixXD = MathNet.Numerics.LinearAlgebra.Matrix<double>;
 using DenseVectorXD = MathNet.Numerics.LinearAlgebra.Double.DenseVector;
@@ -22,6 +21,9 @@ public class NewInteracionController : MonoBehaviour
     public GameObject fingerHip;
     public double[,] u = new double[,] { { 1, 0 } };
 
+    [Header("More values")]
+    public GameObject plane;
+
     [Header("Debug values")]
     public float forceRender;
 
@@ -36,8 +38,6 @@ public class NewInteracionController : MonoBehaviour
     void FixedUpdate()
     {
         stepSymplectic();
-
-        //Debug values
     }
 
     private void stepSymplectic()
@@ -51,14 +51,6 @@ public class NewInteracionController : MonoBehaviour
 
         // v = v + TimeStep * Minv * f; 
         v = add(v, multiply(TimeStep, multiply(Minv, f)));
-        Debug.Log(v[2, 0]);
-
-        Debug.Log(TimeStep * v[2, 0]);
-        Debug.Log(x[2,0] + TimeStep * v[2, 0]);
-
-        Debug.Log(x[2,0]);
-        Debug.Log("");
-
         // x = x + TimeStep * v
         x = add(x, multiply(TimeStep, v));
 
@@ -113,18 +105,40 @@ public class NewInteracionController : MonoBehaviour
 
     private double[,] computeForces()
     {
+        //Get User and Render Stiffness
         double kXU = hip.GetComponent<HIPController>().kUser;
         double kZU = fingerHip.GetComponent<HIPController>().kUser;
+        double kXR = hip.GetComponent<HIPController>().kRender;
+        double kZR = fingerHip.GetComponent<HIPController>().kRender;
 
+        /*Get Positions*/
+        //Hip position
         double[,] x = hip.GetComponent<HIPController>().positionXY();
         double z = fingerHip.GetComponent<HIPController>().relativePositionDistance();
 
+        //Intention position
         double[,] iX = intention.GetComponent<BaseIntentionController>().positionXY();
         double iZ = fingerIntention.GetComponent<IntentionController>().relativePositionDistance();
 
+        //Proxy position
+        double[,] pX = proxy.GetComponent<BaseController>().positionXY();
+        double pZ = fingerProxy.GetComponent<FingerController>().relativePositionDistance();
+
+        /*Calculate forces*/
+        //User intent
         fX = multiply(sub(iX, x), kXU);
         fZ = (iZ - z) * kZU;
 
+        //Rendering force
+        fX = add(fX, multiply(sub(pX, x), kXR));
+
+        double[,] normalPlane = { { -0.707106f, 0.7071067f } };
+
+        //fZ = -kRendering * uT * normal * normalT * (x+uz - p)
+        double fRender = multiply(multiply(multiply(multiply(-kZR, transpose(u)), normalPlane), transpose(normalPlane)), (z - pZ))[0,0];
+        fZ += fRender < 0 ? 0 : fRender;
+
+        //Add forces to matrix
         b = new double[,] {
             {fX[0,0]},
             {fX[0,1]},

@@ -56,11 +56,11 @@ public class HIPController : MonoBehaviour
     }
     public double relativePositionDistance()
     {
-        return Vector3.Distance(relativeObject.transform.position, transform.position);
+        return Vector2.Distance(relativeObject.transform.position, transform.position);
     }
     public double fingerDistance()
     {
-        return Vector3.Distance(baseHand.transform.position, transform.position);
+        return Vector2.Distance(baseHand.transform.position, transform.position);
     }
 
     public void setPositionXY(double[,] position)
