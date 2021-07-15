@@ -655,6 +655,7 @@ MonoBehaviour:
   fingerIntention: {fileID: 1427212725}
   fingerProxy: {fileID: 1580244763}
   fingerHip: {fileID: 1575634406}
+  plane: {fileID: 1715573967}
   forceRender: 0
 --- !u!1 &1403873787
 GameObject:
@@ -849,7 +850,7 @@ MonoBehaviour:
   wVelocity: 1
   minDistance: 1
   maxDistance: 3
-  rotation: 180
+  rotation: 135
   relativeObject: {fileID: 1838556587}
   rotationRadians: 0
   relativeDistance: 0

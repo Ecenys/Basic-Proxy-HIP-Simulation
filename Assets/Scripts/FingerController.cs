@@ -9,11 +9,11 @@ public class FingerController : MonoBehaviour
     public Transform baseHand;
 
     [Space]
-    private bool blocked = false;
     public GameObject[] obstacles;
 
     [Space]
     public Transform relativeObject;
+
 
     private void FixedUpdate()
     {

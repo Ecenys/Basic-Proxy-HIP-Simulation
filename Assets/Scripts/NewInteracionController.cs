@@ -132,8 +132,7 @@ public class NewInteracionController : MonoBehaviour
         //Rendering force
         fX = add(fX, multiply(sub(pX, x), kXR));
 
-        double[,] normalPlane = { { -0.707106f, 0.7071067f } };
-
+        double[,] normalPlane = { { Mathf.Cos(plane.transform.rotation.z), Mathf.Sin(plane.transform.rotation.z) } };
         //fZ = -kRendering * uT * normal * normalT * (x+uz - p)
         double fRender = multiply(multiply(multiply(multiply(-kZR, transpose(u)), normalPlane), transpose(normalPlane)), (z - pZ))[0,0];
         fZ += fRender < 0 ? 0 : fRender;
