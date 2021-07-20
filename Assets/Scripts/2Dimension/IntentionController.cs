@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class IntentionController : MonoBehaviour
 {
+    public enum Dimensions
+    {
+        One,
+        Two
+    }
+
+    public Dimensions dimensions;
+    [Space]
     public float velocity = 1;
     public float wVelocity = 1;
     [Space]
@@ -13,7 +21,6 @@ public class IntentionController : MonoBehaviour
     public float rotation;
     [Space]
     public Transform relativeObject;
-
     [Space]
     public float rotationRadians;
     public float relativeDistance;

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BaseIntentionController : MonoBehaviour
 {
+    public enum Dimensions
+    {
+        One,
+        Two
+    }
 
     public enum ControllerType
     {
@@ -11,6 +16,7 @@ public class BaseIntentionController : MonoBehaviour
         KeyBoard
     }
 
+    public Dimensions dimensions;
     public ControllerType controller;
 
     public float velocity;
@@ -23,21 +29,24 @@ public class BaseIntentionController : MonoBehaviour
         {
             case ControllerType.KeyBoard:
                 //Movimiento
-                if (Input.GetKey("w"))
-                {
-                    transform.position += new Vector3(0, 0.01f * velocity, 0);
-                }
+
                 if (Input.GetKey("a"))
                 {
                     transform.position += new Vector3(-0.01f * velocity, 0, 0);
                 }
-                if (Input.GetKey("s"))
-                {
-                    transform.position += new Vector3(0, -0.01f * velocity, 0);
-                }
                 if (Input.GetKey("d"))
                 {
                     transform.position += new Vector3(0.01f * velocity, 0, 0);
+                }
+                if (dimensions == Dimensions.Two) {
+                    if (Input.GetKey("w"))
+                    {
+                        transform.position += new Vector3(0, 0.01f * velocity, 0);
+                    }
+                    if (Input.GetKey("s"))
+                    {
+                        transform.position += new Vector3(0, -0.01f * velocity, 0);
+                    }
                 }
                 break;
             case ControllerType.Mouse:
@@ -48,13 +57,16 @@ public class BaseIntentionController : MonoBehaviour
 
 
         //Rotacion
-        if (Input.GetKey("q"))
+        if (dimensions == Dimensions.Two)
         {
-            transform.eulerAngles = transform.eulerAngles + 1f * new Vector3(0, 0, 1 * radialVelocity);
-        }
-        if (Input.GetKey("e"))
-        {
-            transform.eulerAngles = transform.eulerAngles - 1f * new Vector3(0, 0, 1 * radialVelocity);
+            if (Input.GetKey("q"))
+            {
+                transform.eulerAngles = transform.eulerAngles + 1f * new Vector3(0, 0, 1 * radialVelocity);
+            }
+            if (Input.GetKey("e"))
+            {
+                transform.eulerAngles = transform.eulerAngles - 1f * new Vector3(0, 0, 1 * radialVelocity);
+            }
         }
     }
 

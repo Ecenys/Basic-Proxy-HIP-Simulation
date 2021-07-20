@@ -87,7 +87,6 @@ public class NewInteracionController : MonoBehaviour
             {hip.GetComponent<HIPController>().positionXY()[0,1] },
             {fingerHip.GetComponent<HIPController>().relativePositionDistance() }
             };
-
         return x;
 
     }
@@ -135,7 +134,7 @@ public class NewInteracionController : MonoBehaviour
         double[,] normalPlane = { { Mathf.Cos(plane.transform.rotation.z), Mathf.Sin(plane.transform.rotation.z) } };
         //fZ = -kRendering * uT * normal * normalT * (x+uz - p)
         double fRender = multiply(multiply(multiply(multiply(-kZR, transpose(u)), normalPlane), transpose(normalPlane)), (z - pZ))[0,0];
-        fZ += fRender < 0 ? 0 : fRender;
+        fZ += fRender;//< 0 ? 0 : fRender;
 
         //Add forces to matrix
         b = new double[,] {
