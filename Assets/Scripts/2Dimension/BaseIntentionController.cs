@@ -18,10 +18,12 @@ public class BaseIntentionController : MonoBehaviour
 
     public Dimensions dimensions;
     public ControllerType controller;
-
+    [Space]
     public float velocity;
     public float radialVelocity;
-
+    [Space]
+    public Transform originProxy;
+    public Transform limit;
 
     private void FixedUpdate()
     {
@@ -48,6 +50,7 @@ public class BaseIntentionController : MonoBehaviour
                         transform.position += new Vector3(0, -0.01f * velocity, 0);
                     }
                 }
+
                 break;
             case ControllerType.Mouse:
                 Vector3 worldPosition = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
