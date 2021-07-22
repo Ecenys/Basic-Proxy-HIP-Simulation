@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class GraphicBallController : MonoBehaviour
 {
-    public Transform axisOrigin;
-    public Transform orginProxy;
-    public GameObject baseProxy;
-    public GameObject fingerProxy;
+    public Transform intentionGraphic;
+    public float movementVelocity;
 
     private void FixedUpdate()
     {
-        transform.position = axisOrigin.position 
-            + new Vector3(fingerProxy.transform.position.x - baseProxy.transform.position.x, 0, 0) 
-            + new Vector3(0, Vector2.Distance(baseProxy.transform.position, orginProxy.transform.position), 0);
+        transform.position = Vector3.MoveTowards(
+            transform.position, 
+            new Vector3(intentionGraphic.position.x, intentionGraphic.position.y, transform.position.z), 
+            Time.deltaTime * movementVelocity
+        );
     }
 }

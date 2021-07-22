@@ -40,15 +40,13 @@ public class BaseIntentionController : MonoBehaviour
                 {
                     transform.position += new Vector3(0.01f * velocity, 0, 0);
                 }
-                if (dimensions == Dimensions.Two) {
-                    if (Input.GetKey("w"))
-                    {
-                        transform.position += new Vector3(0, 0.01f * velocity, 0);
-                    }
-                    if (Input.GetKey("s"))
-                    {
-                        transform.position += new Vector3(0, -0.01f * velocity, 0);
-                    }
+                if (Input.GetKey("w"))
+                {
+                    transform.position += new Vector3(0, 0.01f * velocity, 0);
+                }
+                if (Input.GetKey("s"))
+                {
+                    transform.position += new Vector3(0, -0.01f * velocity, 0);
                 }
 
                 break;
