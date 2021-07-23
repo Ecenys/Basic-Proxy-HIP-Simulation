@@ -22,6 +22,5 @@ public class IntentionGraphicController : MonoBehaviour
         transform.position = axisOrigin.position
             + new Vector3(fingerProxy.GetComponent<OD_FingerController>().relativeDistance, 0, 0)
             + new Vector3(0, Vector2.Distance(baseProxy.transform.position, orginProxy.transform.position), 0);
-        
     }
 }

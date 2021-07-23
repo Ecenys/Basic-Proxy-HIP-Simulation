@@ -285,6 +285,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intentionGraphic: {fileID: 1698630969}
   movementVelocity: 10
+  originData: 1
+  axisOrigin: {fileID: 1765433393}
+  orginProxy: {fileID: 1743456493}
+  baseProxy: {fileID: 1154991389}
+  fingerProxy: {fileID: 1580244763}
 --- !u!135 &943619623
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1116,6 +1121,7 @@ Transform:
   - {fileID: 1154991390}
   - {fileID: 1580244764}
   - {fileID: 1697928855}
+  - {fileID: 1941499065}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1356,13 +1362,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614895426}
-  m_LocalRotation: {x: -0, y: -0, z: 0.36667645, w: 0.9303485}
-  m_LocalPosition: {x: -1.4555806, y: 0.27799752, z: -0.7884069}
+  m_LocalRotation: {x: -0, y: -0, z: 0.42592108, w: 0.90476036}
+  m_LocalPosition: {x: -1.51, y: 0.32, z: -0.7884069}
   m_LocalScale: {x: 0.21010323, y: 15.721834, z: 25}
   m_Children: []
   m_Father: {fileID: 1941499065}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 43.022003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 50.418003}
 --- !u!64 &1614895428
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2030,8 +2036,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941499063}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.38, y: 0.383, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.4806767, y: 0.3880722, z: 0.4464844}
   m_LocalScale: {x: 0.57686204, y: 0.68030137, z: 0.3740732}
   m_Children:
   - {fileID: 943619621}
@@ -2039,8 +2045,8 @@ Transform:
   - {fileID: 1765433393}
   - {fileID: 1614895427}
   - {fileID: 13323862}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1379984650}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1963533741
 GameObject:
