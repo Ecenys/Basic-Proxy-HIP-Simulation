@@ -54,6 +54,8 @@ public class IntentionController : MonoBehaviour
 
         transform.localPosition = relativeObject.position + new Vector3(relativeDistance * Mathf.Cos(rotationRadians), relativeDistance * Mathf.Sin(rotationRadians), 0);
 
+        if (transform.position.x < relativeObject.position.x)
+            transform.position = new Vector3(relativeObject.position.x, transform.position.y, transform.position.z);
 
         rotation = ConvertToDegrees(rotationRadians);
     }

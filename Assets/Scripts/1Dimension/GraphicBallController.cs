@@ -32,6 +32,7 @@ public class GraphicBallController : MonoBehaviour
     private void FixedUpdate()
     {
         switch (originData) {
+
             case Follow.Intention:
                 transform.position = Vector3.MoveTowards(
                     transform.position,
@@ -39,12 +40,12 @@ public class GraphicBallController : MonoBehaviour
                     Time.deltaTime * movementVelocity
                     );
                 break;
+
             case Follow.Proxy:
                 transform.position = axisOrigin.position
                     + new Vector3(fingerProxy.transform.position.x - baseProxy.transform.position.x, 0, 0)
                     + new Vector3(0, Vector2.Distance(baseProxy.transform.position, orginProxy.transform.position), 0);
                 break;
-
         }
     }
 }

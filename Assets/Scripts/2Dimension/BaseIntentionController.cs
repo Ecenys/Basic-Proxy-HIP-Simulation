@@ -69,6 +69,11 @@ public class BaseIntentionController : MonoBehaviour
                 transform.eulerAngles = transform.eulerAngles - 1f * new Vector3(0, 0, 1 * radialVelocity);
             }
         }
+
+        if(originProxy.position.x > transform.position.x)
+        {
+            transform.position = new Vector3(originProxy.position.x, transform.position.y, transform.position.z);
+        }
     }
 
     public double[,] positionXY()
